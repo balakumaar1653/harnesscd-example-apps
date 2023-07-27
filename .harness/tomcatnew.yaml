@@ -22,10 +22,16 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: K8sDryRun
-                  name: K8sDryRun_1
-                  identifier: K8sDryRun_1
-                  spec: {}
+                  type: K8sApply
+                  name: K8sApply_1
+                  identifier: K8sApply_1
+                  spec:
+                    filePaths:
+                      - tomcatsecret.yaml
+                    skipDryRun: false
+                    skipSteadyStateCheck: false
+                    skipRendering: false
+                    overrides: []
                   timeout: 10m
             rollbackSteps: []
         tags: {}
