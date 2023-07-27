@@ -27,7 +27,7 @@ pipeline:
                   identifier: K8sApply_1
                   spec:
                     filePaths:
-                      - tomcatsecret.yaml
+                      - tomcat/tomcatsecret.yaml
                     skipDryRun: false
                     skipSteadyStateCheck: false
                     skipRendering: false
