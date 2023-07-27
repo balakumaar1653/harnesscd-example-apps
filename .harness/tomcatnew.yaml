@@ -22,16 +22,10 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: K8sApply
-                  name: tomcatsecret
-                  identifier: tomcatsecret
-                  spec:
-                    filePaths:
-                      - helm-guestbook/harnesscd-pipeline/testsecret.yaml
-                    skipDryRun: true
-                    skipSteadyStateCheck: false
-                    skipRendering: false
-                    overrides: []
+                  type: K8sDryRun
+                  name: K8sDryRun_1
+                  identifier: K8sDryRun_1
+                  spec: {}
                   timeout: 10m
             rollbackSteps: []
         tags: {}
