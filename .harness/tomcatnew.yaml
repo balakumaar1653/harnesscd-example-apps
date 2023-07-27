@@ -1,0 +1,43 @@
+pipeline:
+  name: tomcatnew
+  identifier: tomcatnew
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: tomcatnew
+        identifier: tomcatnew
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: Tomcat
+          environment:
+            environmentRef: harnessdevenvdep
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: harnessk8sinfradep
+          execution:
+            steps:
+              - step:
+                  type: K8sApply
+                  name: tomcatsecret
+                  identifier: tomcatsecret
+                  spec:
+                    filePaths:
+                      - helm-guestbook/harnesscd-pipeline/testsecret.yaml
+                    skipDryRun: true
+                    skipSteadyStateCheck: false
+                    skipRendering: false
+                    overrides: []
+                  timeout: 10m
+            rollbackSteps: []
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
